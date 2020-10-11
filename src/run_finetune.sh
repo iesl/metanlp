@@ -6,6 +6,7 @@ then
     echo "Downloading BERT"
     wget https://storage.googleapis.com/bert_models/2018_10_18/cased_L-12_H-768_A-12.zip
     unzip cased_L-12_H-768_A-12.zip
+    rm cased_L-12_H-768_A-12.zip
 fi
 
 # download and extract Hybrid-SMLMT model, since the file is large this generates a temp cookie to approve the download
@@ -15,6 +16,7 @@ if [[ ! -d "models/HSMLMT" ]]
 then
     echo "Downloading HSMLMT"
     wget --load-cookies /tmp/cookies.txt "https://drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://drive.google.com/uc?export=download&id=1k5WJl-rZ8ks__PTPdoS9ibLmY2ifP6H5' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1k5WJl-rZ8ks__PTPdoS9ibLmY2ifP6H5" -O HSMLMT.zip
+    mkdir -p models
     unzip -d models/HSMLMT HSMLMT.zip
 fi
 

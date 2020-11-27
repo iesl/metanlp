@@ -1,7 +1,17 @@
 # Self-Supervised Meta-Learning for Few-Shot Natural Language Classification Tasks
-Code for training the meta-learning models and fine-tuning on downstream tasks.
+Code for training the meta-learning models and fine-tuning on downstream tasks. If you use this code please cite the paper.
 
 Paper: [Self-Supervised Meta-Learning for Few-Shot Natural Language Classification Tasks](https://arxiv.org/pdf/2009.08445.pdf)
+
+```
+@inproceedings{bansal2020self,
+  title={Self-Supervised Meta-Learning for Few-Shot Natural Language Classification Tasks},
+  author={Bansal, Trapit and Jha, Rishikesh and Munkhdalai, Tsendsuren and McCallum, Andrew},
+  booktitle={Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages={522--534},
+  year={2020}
+}
+```
 
 ## Trained Models
 - Hybrid-SMLMT: https://drive.google.com/file/d/1k5WJl-rZ8ks__PTPdoS9ibLmY2ifP6H5/view?usp=sharing
@@ -53,6 +63,7 @@ Hyper-parameters for Hybrid-SMLMT
 - K = 32:  
 --num_train_epochs=100\*N  
 --train_batch_size=8\*N  
+
   
 ### Data for fine-tuning
 The data for the fine-tuning tasks can be downloaded from https://github.com/iesl/leopard 
@@ -81,7 +92,24 @@ so code in the BERT [github repository](https://github.com/google-research/bert)
 The followiing arguments to run_classifier_pretrain.py need to be set:
 - task_eval_files: train_tf_record, eval_tf_record
     - where train_tf_record is the train file for the task and eval_tf_record is the test file
-- test_num_labels: number of classes in the task
+- test_num_labels: number of classes in the task  
+
+### LEOPARD Fine-tuning
+Hyper-parameters for the LEOPARD model:
+- K = 4:  
+--num_train_epochs=150\*N  
+--train_batch_size=2\*N
+
+- K = 8:  
+--num_train_epochs=200\*N --train_batch_size=2\*N
+
+- K = 16:  
+--num_train_epochs=200\*N --train_batch_size=4\*N
+
+- K = 32:  
+--num_train_epochs=50\*N --train_batch_size=2\*N  
+
+In addition, set the argument `warp_layers=false` for fine-tuning the LEOPARD model.  
 
 ## Meta-Training
 This requires large training time and typically should be run on multiple GPU.
